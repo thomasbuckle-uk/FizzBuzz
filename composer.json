@@ -57,7 +57,9 @@
     }
   },
   "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.18",
     "roave/security-advisories": "dev-master",
+    "symfony/maker-bundle": "^1.29",
     "symfony/phpunit-bridge": "^5.2"
   }
 }
