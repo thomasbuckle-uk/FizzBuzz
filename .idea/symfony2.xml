@@ -8,5 +8,6 @@
     <option name="twigBundleNamespaceSupport" value="false" />
     <option name="profilerCsvPath" value="" />
     <option name="profilerHttpEnabled" value="true" />
+    <option name="lastServiceGeneratorLanguage" value="yaml" />
   </component>
 </project>

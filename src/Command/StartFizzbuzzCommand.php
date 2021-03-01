@@ -17,7 +17,7 @@ class StartFizzbuzzCommand extends Command
     protected function configure()
     {
         $this
-            ->setDescription(self::$defaultDescription)
+            ->setDescription("Prints Numbers 1-500, if a number is divisible by 3 'FIZZ' is printed, if 5 'BUZZ' is printed. If divisible by both 3 and 5 then 'FIZZBUZZ' is printed. Finally if a prime number 'FIZZBUZZ++' will be printed")
             ->addArgument('arg1', InputArgument::OPTIONAL, 'Argument description')
             ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
         ;
