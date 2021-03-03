@@ -59,6 +59,9 @@
     "roave/security-advisories": {
         "version": "dev-master"
     },
+    "symfony/browser-kit": {
+        "version": "v5.2.3"
+    },
     "symfony/cache": {
         "version": "v5.2.3"
     },
@@ -80,11 +83,17 @@
             "bin/console"
         ]
     },
+    "symfony/css-selector": {
+        "version": "v5.2.3"
+    },
     "symfony/dependency-injection": {
         "version": "v5.2.3"
     },
     "symfony/deprecation-contracts": {
         "version": "v2.2.0"
+    },
+    "symfony/dom-crawler": {
+        "version": "v5.2.3"
     },
     "symfony/dotenv": {
         "version": "v5.2.3"
@@ -236,6 +245,9 @@
     },
     "symfony/string": {
         "version": "v5.2.3"
+    },
+    "symfony/test-pack": {
+        "version": "v1.0.7"
     },
     "symfony/translation-contracts": {
         "version": "v2.3.0"
