@@ -24,25 +24,13 @@ class ImportAppdataCommand extends Command
                 InputOption::VALUE_REQUIRED,
                 'Location of appdata.ini',
                 '%kernel.project_dir%/tests/parse_test/appCodes.ini'
-            )
-            ->addOption(
-                'verbose',
-                null,
-                InputOption::VALUE_NONE,
-                'Display Output During Parsing'
             );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $arg1 = $input->getArgument('location');
-
-        if ($arg1) {
-            $io->note(sprintf('You passed an argument: %s', $arg1));
-        }
-
-        if ($input->getOption('option1')) {
+        if ($input->getOption('dir')) {
             // ...
         }
 
