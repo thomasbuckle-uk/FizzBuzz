@@ -2,10 +2,10 @@
 
 namespace App\Command;
 
+use App\Service\ImportService;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -13,14 +13,20 @@ class ImportTagsCommand extends Command
 {
     protected static $defaultName = 'app:import:tags';
     protected static $defaultDescription = 'Add a short description for your command';
+    private ImportService $import;
+    private LoggerInterface $logger;
+
+    public function __construct(ImportService $import, LoggerInterface $logger, string $name = null)
+    {
+        $this->import = $import;
+        $this->logger = $logger;
+        parent::__construct($name);
+    }
 
     protected function configure()
     {
         $this
-            ->setDescription(self::$defaultDescription)
-            ->addArgument('arg1', InputArgument::OPTIONAL, 'Argument description')
-            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
-        ;
+            ->setDescription(self::$defaultDescription);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -46,7 +52,8 @@ class ImportTagsCommand extends Command
             ]
         ];
         $io = new SymfonyStyle($input, $output);
-
+        #TODO improve so duplicated tags wont be imported OR so that dupicate tag names are allowed
+        $this->import->importTagGroups($activeTags);
         return Command::SUCCESS;
     }
 }

@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\TagRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=TagRepository::class)
+ * @UniqueEntity("name")
  */
 class Tag
 {
@@ -31,6 +33,11 @@ class Tag
      * @ORM\ManyToOne(targetEntity=TagGroup::class, inversedBy="tags")
      */
     private ?TagGroup $tag_group;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=TagGroup::class, inversedBy="tag")
+     */
+    private $tagGroup;
 
     public function getId(): ?int
     {

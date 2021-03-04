@@ -6,9 +6,11 @@ use App\Repository\TagGroupRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=TagGroupRepository::class)
+ * @UniqueEntity("name")
  */
 
 class TagGroup
@@ -31,14 +33,16 @@ class TagGroup
     private $is_active;
 
     /**
-     * @ORM\OneToMany(targetEntity=Tag::class, mappedBy="tag_group")
+     * @ORM\OneToMany(targetEntity=Tag::class, mappedBy="tagGroup")
      */
-    private ArrayCollection $tags;
+    private $tag;
 
     public function __construct()
     {
-        $this->tags = new ArrayCollection();
+        $this->tag = new ArrayCollection();
     }
+
+
 
     public function getId(): ?int
     {
@@ -70,7 +74,7 @@ class TagGroup
     }
 
     /**
-     * @return Collection|Tag[]
+     * @return Collection
      */
     public function getTags(): Collection
     {
@@ -97,5 +101,13 @@ class TagGroup
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Tag[]
+     */
+    public function getTag(): Collection
+    {
+        return $this->tag;
     }
 }
