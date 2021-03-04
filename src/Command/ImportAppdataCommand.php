@@ -2,6 +2,9 @@
 
 namespace App\Command;
 
+use App\Service\DivisibleService;
+use App\Service\ImportService;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,6 +14,16 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ImportAppdataCommand extends Command
 {
+    private ImportService $import;
+    private LoggerInterface $logger;
+
+    public function __construct(ImportService $import, LoggerInterface $logger, string $name = null)
+    {
+        $this->import = $import;
+        $this->logger = $logger;
+        parent::__construct($name);
+    }
+
     protected static $defaultName = 'app:import:appdata';
     protected static string $defaultDescription = 'Import Appdata.ini file to database';
 
@@ -41,10 +54,17 @@ class ImportAppdataCommand extends Command
             return Command::FAILURE;
         }
 
-        $entityManager = $this->getDoctrine()->getManager();
-        foreach ( $results as $result) {
 
+        $io->success('Successfully Parsed File - Importing Contents to Database');
+        try {
+            $this->import->importIniFile($results);
+        } catch (\Exception $e) {
+            $this->logger->error($e->getMessage());
+            $io->error('Error during Import - ' . $e->getMessage());
+            return Command::FAILURE;
         }
+
+
         $io->success('Success!');
         return Command::SUCCESS;
     }

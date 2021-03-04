@@ -4,11 +4,13 @@ namespace App\Entity;
 
 use App\Repository\AppCodeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=AppCodeRepository::class)
+ * @UniqueEntity("code")
  */
 class AppCode
 {
@@ -22,17 +24,17 @@ class AppCode
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      */
-    private $code;
+    private ?string $code;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private ?string $name;
 
     /**
      * @ORM\OneToMany(targetEntity=DeviceTokenEntry::class, mappedBy="appCode", orphanRemoval=true)
      */
-    private ArrayCollection $deviceTokenEntries;
+    private $deviceTokenEntries;
 
     public function __construct()
     {
