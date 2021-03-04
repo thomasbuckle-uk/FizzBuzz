@@ -23,19 +23,29 @@ class ImportAppdataCommand extends Command
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Location of appdata.ini',
-                '%kernel.project_dir%/tests/parse_test/appCodes.ini'
+                'parser_test/appCodes.ini'
             );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+        $file_location = 'parser_test/appCodes.ini';
         if ($input->getOption('dir')) {
-            // ...
+            $file_location = $input->getOption('dir');
         }
 
-        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
+        $results = parse_ini_file($file_location, false, INI_SCANNER_TYPED);
+        if ($results === false) {
+            $io->error("Unable to parse appCodes.ini at the given location - " . $file_location);
+            return Command::FAILURE;
+        }
 
+        $entityManager = $this->getDoctrine()->getManager();
+        foreach ( $results as $result) {
+
+        }
+        $io->success('Success!');
         return Command::SUCCESS;
     }
 }
