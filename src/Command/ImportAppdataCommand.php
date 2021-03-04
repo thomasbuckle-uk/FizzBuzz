@@ -18,13 +18,18 @@ class ImportAppdataCommand extends Command
     {
         $this
             ->setDescription(self::$defaultDescription)
-            ->addOption('dir', null, InputOption::VALUE_REQUIRED, 'Location of appdata.ini')
+            ->addOption(
+                'dir',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Location of appdata.ini',
+                '%kernel.project_dir%/tests/parse_test/appCodes.ini'
+            )
             ->addOption(
                 'verbose',
                 null,
                 InputOption::VALUE_NONE,
-                'Display Output During Parsing',
-                '%kernel.project_dir%/tests/parse_test/appCodes.ini'
+                'Display Output During Parsing'
             );
     }
 
