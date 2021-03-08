@@ -73,9 +73,6 @@ class ImportService
             $tag->setIsActive(true);
             $tag->setName($tagRow);
 
-            //Find TagGroup
-
-
             //TODO Repeated Code, remove if time
             $errors = $this->validator->validate($tag);
             if (count($errors) > 0) {
