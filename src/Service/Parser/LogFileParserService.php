@@ -16,10 +16,10 @@ class LogFileParserService
     private Finder $finder;
     private string $projectDir;
 
-    public function __construct(LoggerInterface $logger, Finder $finder, string $projectDir)
+    public function __construct(LoggerInterface $logger, string $projectDir)
     {
         $this->logger = $logger;
-        $this->finder = $finder;
+        $this->finder = new Finder();
         $this->projectDir = $projectDir;
     }
 
@@ -27,13 +27,13 @@ class LogFileParserService
      * Returns Found Files
      *
      *
-     * @param string $depth The Depth Level expression - IE '>1' will start matching at level 1. Default = Recursive
+     * @param string|null $depth The Depth Level expression - IE '>1' will start matching at level 1. Default = Recursive
      * @param string $startLocation Starting Directory relative to %kernel.project_dir%
      * @param string $fileType File type eg '.log' or '.csv' etc
      * @return bool|Finder
      */
     public function getAllFilesByType(
-        string $depth,
+        string $depth = null,
         string $startLocation = '/parser_test',
         string $fileType = ".log"
     ): bool|Finder {
@@ -46,7 +46,6 @@ class LogFileParserService
         }
         return false;
     }
-
 
     public function parseColumns()
     {
