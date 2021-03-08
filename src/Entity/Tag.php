@@ -30,12 +30,7 @@ class Tag
     private $is_active;
 
     /**
-     * @ORM\ManyToOne(targetEntity=TagGroup::class, inversedBy="tags")
-     */
-    private ?TagGroup $tag_group;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=TagGroup::class, inversedBy="tag")
+     * @ORM\ManyToOne(targetEntity="App\Entity\TagGroup", inversedBy="tags")
      */
     private $tagGroup;
 
@@ -46,12 +41,12 @@ class Tag
 
     public function getGroupId(): ?int
     {
-        return $this->group_id;
+        return $this->tagGroup;
     }
 
     public function setGroupId(?int $group_id): self
     {
-        $this->group_id = $group_id;
+        $this->tagGroup = $group_id;
 
         return $this;
     }
@@ -82,12 +77,12 @@ class Tag
 
     public function getTagGroup(): ?TagGroup
     {
-        return $this->tag_group;
+        return $this->tagGroup;
     }
 
     public function setTagGroup(?TagGroup $tag_group): self
     {
-        $this->tag_group = $tag_group;
+        $this->tagGroup = $tag_group;
 
         return $this;
     }

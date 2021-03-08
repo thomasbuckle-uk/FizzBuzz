@@ -52,7 +52,7 @@ class ImportTagsCommand extends Command
             ]
         ];
         $io = new SymfonyStyle($input, $output);
-        #TODO improve so duplicated tags wont be imported OR so that dupicate tag names are allowed
+        #TODO improve so duplicated tags wont be imported OR so that duplicate tag names are allowed
         $this->import->importTagGroups($activeTags);
         return Command::SUCCESS;
     }

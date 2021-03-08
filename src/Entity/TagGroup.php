@@ -33,9 +33,9 @@ class TagGroup
     private $is_active;
 
     /**
-     * @ORM\OneToMany(targetEntity=Tag::class, mappedBy="tagGroup")
+     * @ORM\OneToMany(targetEntity="App\Entity\Tag", mappedBy="tagGroup")
      */
-    private $tag;
+    private $tags;
 
     public function __construct()
     {

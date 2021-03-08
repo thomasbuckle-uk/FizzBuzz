@@ -41,7 +41,6 @@ class ImportService
             } else {
                 $this->em->persist($appcode);
             }
-
         }
         $this->em->flush();
         return $errorsArray;
@@ -49,7 +48,7 @@ class ImportService
 
     public function importTagGroups(array $array): void
     {
-        foreach ($array as $group=>$value) {
+        foreach ($array as $group => $value) {
             $taggroup = new TagGroup();
             $taggroup->setName($group);
             $taggroup->setIsActive(true);
@@ -63,11 +62,7 @@ class ImportService
                 //Nested foreach, this is bad but time is short
                 $this->importTags($value, $taggroup);
             }
-
-
         }
-
-
     }
 
     public function importTags(array $taggoup, TagGroup $groupId): void
@@ -77,6 +72,9 @@ class ImportService
             $tag->setTagGroup($groupId);
             $tag->setIsActive(true);
             $tag->setName($tagRow);
+
+            //Find TagGroup
+
 
             //TODO Repeated Code, remove if time
             $errors = $this->validator->validate($tag);
