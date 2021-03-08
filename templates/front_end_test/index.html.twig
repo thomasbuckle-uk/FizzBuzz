@@ -1,5 +1,12 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('front_end_test') }}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('front_end_test') }}
+{% endblock %}
 {% block title %}Hello FrontEndTestController!{% endblock %}
 
 {% block body %}
@@ -9,12 +16,8 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Front End Test using an API</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/thomasbuckle-uk/dev/projects/future_publishing_test/FizzBuzz/FizzBuzz/src/Controller/FrontEndTestController.php'|file_link(0) }}">src/Controller/FrontEndTestController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/thomasbuckle-uk/dev/projects/future_publishing_test/FizzBuzz/FizzBuzz/templates/front_end_test/index.html.twig'|file_link(0) }}">templates/front_end_test/index.html.twig</a></code></li>
-    </ul>
+
 </div>
 {% endblock %}
